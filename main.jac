@@ -351,11 +351,18 @@ with entry:__main__ {
     # Configure API keys
     groq_key = os.environ.get("GROQ_API_KEY", "");
     serper_key = os.environ.get("SERPER_API_KEY", "");
+    # Prompt for keys if missing
+    if not groq_key {
+        groq_key = get_user_input("Enter your GROQ_API_KEY (input hidden not supported here):");
+    }
+    if not serper_key {
+        serper_key = get_user_input("Enter your SERPER_API_KEY (input hidden not supported here):");
+    }
     setup_api_keys(groq_key, serper_key);
     
     # Validate API keys before proceeding
     if not validate_api_keys() {
-        print("❌ API key validation failed. Exiting...");
+        print("❌ API key validation failed. Please set environment variables or re-run and provide keys.");
         exit;
     }
     
