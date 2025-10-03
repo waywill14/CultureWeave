@@ -25,6 +25,27 @@ def show_welcome() {
     print("=" * 60);
 }
 
+def select_language(title: str) -> str {
+    print("\n" + title);
+    print("1. English");
+    print("2. Kiswahili");
+    print("3. Kikuyu");
+    print("4. Luo");
+    print("5. Kamba");
+    print("6. Maasai");
+    print("7. Other (type any language)");
+    languages = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba", "Maasai", "Other"];
+    choice = get_user_choice(languages);
+    if choice == 7 {
+        custom_lang = get_user_input("Enter language name (any language supported):");
+        if not custom_lang {
+            return "English";
+        }
+        return custom_lang;
+    }
+    return languages[choice - 1];
+}
+
 def show_menu() {
     print("\n🎯 What would you like to do?");
     print("1. 📖 Generate AI-Powered Cultural Story");
@@ -137,16 +158,7 @@ def handle_story_generation() {
     story_choice = get_user_choice(story_types);
     story_type = story_types[story_choice - 1];
     
-    print("\nChoose language:");
-    print("1. English");
-    print("2. Kiswahili");
-    print("3. Kikuyu");
-    print("4. Luo");
-    print("5. Kamba");
-    print("6. Maasai");
-    languages = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba", "Maasai"];
-    lang_choice = get_user_choice(languages);
-    language = languages[lang_choice - 1];
+    language = select_language("Choose language:");
     
     print(f"\n🤖 Generating story with prompt: '{user_prompt}'");
     print(f"📝 Story type: {story_type}");
@@ -229,16 +241,7 @@ def handle_translation() {
     
     story = get_user_input("Enter text to translate:");
     
-    print("\nChoose target language:");
-    print("1. English");
-    print("2. Kiswahili");
-    print("3. Kikuyu");
-    print("4. Luo");
-    print("5. Kamba");
-    print("6. Maasai");
-    languages = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba", "Maasai"];
-    lang_choice = get_user_choice(languages);
-    target_language = languages[lang_choice - 1];
+    target_language = select_language("Choose target language:");
     
     cultural_context = get_user_input("Enter cultural context (e.g., 'Community cooperation'):");
     
@@ -330,16 +333,7 @@ def handle_ar_experience() {
     
     cultural_context = get_user_input("Enter cultural context (e.g., 'Ancient rituals and traditions'):");
     
-    print("\nChoose language for narration:");
-    print("1. English");
-    print("2. Kiswahili");
-    print("3. Kikuyu");
-    print("4. Luo");
-    print("5. Kamba");
-    print("6. Maasai");
-    languages = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba", "Maasai"];
-    lang_choice = get_user_choice(languages);
-    language = languages[lang_choice - 1];
+    language = select_language("Choose language for narration:");
     
     print(f"\n🥽 Creating AR experience:");
     print(f"📍 Site: {site}");
