@@ -1,4 +1,4 @@
-import from config { setup_api_keys, validate_api_keys }
+import from config { setup_api_keys, validate_api_keys, load_env_from_dotenv }
 import os;
 import from ai_functions { 
     generate_ai_story, provide_cultural_insights, ai_translate_story,
@@ -349,6 +349,11 @@ def handle_ar_experience() {
 # Main entry point with interactive menu
 with entry:__main__ {
     # Configure API keys
+    # Attempt to load from .env (optional), then fallback to .env.example
+    loaded = load_env_from_dotenv();
+    if not loaded {
+        _ = load_env_from_dotenv(".env.example");
+    }
     groq_key = os.environ.get("GROQ_API_KEY", "");
     serper_key = os.environ.get("SERPER_API_KEY", "");
     # Prompt for keys if missing
