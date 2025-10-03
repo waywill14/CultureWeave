@@ -1,4 +1,5 @@
 import from config { setup_api_keys, validate_api_keys }
+import os;
 import from ai_functions { 
     generate_ai_story, provide_cultural_insights, ai_translate_story,
     verify_cultural_authenticity, generate_ar_experience, generate_branching_story,
@@ -354,10 +355,9 @@ def handle_ar_experience() {
 # Main entry point with interactive menu
 with entry:__main__ {
     # Configure API keys
-    setup_api_keys(
-        "GROQ_API_KEY_REMOVED",
-        "SERPER_API_KEY_REMOVED"
-    );
+    groq_key = os.environ.get("GROQ_API_KEY", "");
+    serper_key = os.environ.get("SERPER_API_KEY", "");
+    setup_api_keys(groq_key, serper_key);
     
     # Validate API keys before proceeding
     if not validate_api_keys() {
